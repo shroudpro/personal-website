@@ -12,7 +12,7 @@
         :class="{ 'is-active': activeTarget === item.target }"
         :to="{ path: '/', hash: `#${item.target}` }"
       >
-        {{ item.label }}
+        {{ getNavLabel(item.target) }}
       </RouterLink>
     </nav>
 
@@ -31,6 +31,7 @@
         </a>
       </div>
       <p>© 2026 {{ profile.name }}</p>
+      <button class="locale-toggle" type="button" @click="toggleLocale">{{ t.localeToggle }}</button>
     </div>
   </aside>
 </template>
@@ -40,9 +41,19 @@ import { computed, onBeforeUnmount, onMounted, ref } from 'vue'
 import { RouterLink } from 'vue-router'
 import { navItems } from '../../data/nav'
 import { profile } from '../../data/profile'
+import { useLocale } from '../../composables/use-locale'
 
 const activeTarget = ref(navItems[0]?.target ?? 'home')
 const enabledSocialLinks = computed(() => profile.contactLinks.filter((link) => link.enabled))
+const { t, toggleLocale } = useLocale()
+
+function getNavLabel(target: string): string {
+  if (target in t.value.nav) {
+    return t.value.nav[target as keyof typeof t.value.nav]
+  }
+
+  return target
+}
 
 function updateActiveTarget(): void {
   const visibleTarget = navItems.find((item) => {

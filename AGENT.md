@@ -4,7 +4,7 @@
 
 ## 当前目标
 
-本项目是一个基于 Vue3 + Vite + TypeScript 的静态个人作品集网站，用于展示 Shroud 的个人简介、AI 应用项目、经历、成就和联系方式。网站不包含后端、数据库、登录、后台管理或真实表单提交。
+本项目是一个基于 Vue3 + Vite + TypeScript + FastAPI 的个人自用内容管理型作品集网站，用于展示 Shroud 的个人简介、AI 应用项目、经历、成就和联系方式。网站不包含访客注册、访客登录、完整账号系统、可视化后台、评论、点赞、访问统计或真实 Contact 表单提交。
 
 ## 已完成内容
 
@@ -69,7 +69,16 @@
    - 已配置 Vue Router history fallback，所有路径回退到 `/index.html`。
    - 已新增 `README.md`，说明项目定位、技术栈、运行方式、构建方式、目录结构、数据维护方式和 Netlify 部署方式。
 
+7. 内容管理升级
+   - 已新增静态 UI 中英文切换，语言状态保存在 `localStorage`。
+   - Contact 已从表单改为静态信息展示，包含 Email、GitHub、Resume、Status、Location。
+   - 已新增 FastAPI 后端骨架，遵守 `api / service / repository / schema / model` 分层。
+   - 已实现 Experience、Project、Achievement 的公开读取接口和写入令牌保护的 CRUD 接口。
+   - 已实现 GitHub README 规则解析创建 Project 的接口，写入令牌由后端环境变量校验。
+   - 前端 Experience、Projects、Achievements 和 ProjectDetail 已接入 API，并保留本地 fallback 数据。
+
 ## 后续建议
 
 - 补充真实 Resume 文件后，再把 `profile.ts` 中 Resume 链接的 `enabled` 改为 `true`。
+- 生产部署后，在 Netlify 配置 `VITE_API_BASE_URL`，在后端平台配置 `DATABASE_URL`、`API_WRITE_TOKEN`、可选 `GITHUB_TOKEN`。
 - 如需进一步贴近样板图，可以继续微调 PNG 裁切边缘、素材尺寸和 section 中的位置。

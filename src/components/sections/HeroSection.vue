@@ -6,7 +6,7 @@
         <h1>{{ profile.name }}</h1>
         <p class="hero-section__headline">{{ profile.headline }}</p>
         <p class="hero-section__intro">{{ profile.heroIntro }}</p>
-        <TextArrowLink label="View My Work" :to="{ path: '/', hash: '#projects' }" />
+        <TextArrowLink :label="t.action.viewWork" :to="{ path: '/', hash: '#projects' }" />
       </div>
 
       <div class="section-art hero-section__art">
@@ -23,4 +23,7 @@ import DoodleImage from '../common/DoodleImage.vue'
 import TextArrowLink from '../common/TextArrowLink.vue'
 import WatercolorBlob from '../common/WatercolorBlob.vue'
 import { profile } from '../../data/profile'
+import { useLocale } from '../../composables/use-locale'
+
+const { t } = useLocale()
 </script>

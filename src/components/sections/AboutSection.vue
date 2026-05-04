@@ -3,11 +3,11 @@
     <div class="section-inner">
       <div class="section-grid">
         <div>
-          <SectionTitle title="About Me" eyebrow="2. About" />
+          <SectionTitle :title="t.section.aboutTitle" :eyebrow="t.section.aboutEyebrow" />
           <div class="copy-block">
             <p v-for="paragraph in profile.aboutIntro" :key="paragraph">{{ paragraph }}</p>
           </div>
-          <TextArrowLink label="More About Me" :to="{ path: '/', hash: '#experience' }" />
+          <TextArrowLink :label="t.action.moreAbout" :to="{ path: '/', hash: '#experience' }" />
         </div>
 
         <div class="section-art about-section__art">
@@ -33,4 +33,7 @@ import SectionTitle from '../common/SectionTitle.vue'
 import TextArrowLink from '../common/TextArrowLink.vue'
 import WatercolorBlob from '../common/WatercolorBlob.vue'
 import { profile } from '../../data/profile'
+import { useLocale } from '../../composables/use-locale'
+
+const { t } = useLocale()
 </script>

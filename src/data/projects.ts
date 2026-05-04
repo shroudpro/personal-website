@@ -14,7 +14,8 @@ export interface ProjectAction {
 }
 
 export interface ProjectItem {
-  id: string
+  id: string | number
+  slug?: string
   title: string
   type: string
   summary: string
@@ -115,7 +116,7 @@ export function getFeaturedProjects(limit = 3): ProjectItem[] {
 }
 
 export function getProjectById(id: string): ProjectItem | undefined {
-  return projects.find((project) => project.id === id)
+  return projects.find((project) => String(project.id) === id || project.slug === id)
 }
 
 export function getProjectActions(project: ProjectItem): ProjectAction[] {
@@ -136,4 +137,8 @@ export function getProjectActions(project: ProjectItem): ProjectAction[] {
   }
 
   return actions
+}
+
+export function getProjectRouteId(project: ProjectItem): string {
+  return project.slug ?? String(project.id)
 }

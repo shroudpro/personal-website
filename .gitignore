@@ -1,0 +1,8 @@
+node_modules/
+dist/
+.npm-cache-local/
+backend/.pytest_cache/
+backend/tests/runtime/
+backend/portfolio.db
+*.pyc
+__pycache__/

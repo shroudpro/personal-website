@@ -2,35 +2,24 @@
   <section id="contact" class="portfolio-section contact-section">
     <div class="section-inner section-grid">
       <div>
-        <SectionTitle title="Let’s Connect" eyebrow="6. Contact" />
+        <SectionTitle :title="t.section.contactTitle" :eyebrow="t.section.contactEyebrow" />
         <p class="contact-section__intro">{{ profile.contactIntro }}</p>
 
-        <form class="contact-form" @submit.prevent="showStaticNotice">
-          <label>
-            <span>Name</span>
-            <input type="text" autocomplete="name" />
-          </label>
-          <label>
-            <span>Email</span>
-            <input type="email" autocomplete="email" />
-          </label>
-          <label>
-            <span>Message</span>
-            <textarea rows="4"></textarea>
-          </label>
-          <TextArrowLink label="Send Message" @click="showStaticNotice" />
-          <p v-if="noticeVisible" class="contact-form__notice" role="status">
-            {{ profile.contactNotice }}
-          </p>
-        </form>
-
-        <ul class="contact-links">
+        <ul class="contact-links contact-links--panel">
           <li v-for="link in profile.contactLinks" :key="link.label">
-            <span>{{ link.label }}</span>
+            <span>{{ contactLabelMap[link.label] }}</span>
             <a v-if="link.enabled" :href="link.href" target="_blank" rel="noreferrer">
               {{ link.value }}
             </a>
-            <em v-else>{{ link.value }}</em>
+            <em v-else>{{ link.value || t.contact.disabled }}</em>
+          </li>
+          <li>
+            <span>{{ t.contact.status }}</span>
+            <em>{{ profile.status }}</em>
+          </li>
+          <li>
+            <span>{{ t.contact.location }}</span>
+            <em>{{ profile.location }}</em>
           </li>
         </ul>
       </div>
@@ -44,16 +33,17 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { computed } from 'vue'
 import DoodleImage from '../common/DoodleImage.vue'
 import SectionTitle from '../common/SectionTitle.vue'
-import TextArrowLink from '../common/TextArrowLink.vue'
 import WatercolorBlob from '../common/WatercolorBlob.vue'
 import { profile } from '../../data/profile'
+import { useLocale } from '../../composables/use-locale'
 
-const noticeVisible = ref(false)
-
-function showStaticNotice(): void {
-  noticeVisible.value = true
-}
+const { t } = useLocale()
+const contactLabelMap = computed<Record<string, string>>(() => ({
+  Email: t.value.contact.email,
+  GitHub: t.value.contact.github,
+  Resume: t.value.contact.resume,
+}))
 </script>

@@ -2,8 +2,8 @@
   <section id="projects" class="portfolio-section projects-section">
     <div class="section-inner">
       <div class="section-heading-row">
-        <SectionTitle title="Selected Projects" eyebrow="4. Projects Showcase" />
-        <TextArrowLink label="View All Projects" :to="{ path: '/', hash: '#projects' }" />
+        <SectionTitle :title="t.section.projectsTitle" :eyebrow="t.section.projectsEyebrow" />
+        <TextArrowLink :label="t.action.viewAllProjects" :to="{ path: '/', hash: '#projects' }" />
       </div>
 
       <div class="project-grid">
@@ -11,7 +11,7 @@
           v-for="project in featuredProjects"
           :key="project.id"
           class="project-card"
-          :to="{ name: 'project-detail', params: { id: project.id } }"
+          :to="{ name: 'project-detail', params: { id: getProjectRouteId(project) } }"
         >
           <div class="project-card__image">
             <WatercolorBlob tone="small" />
@@ -21,7 +21,7 @@
           <h3>{{ project.title }}</h3>
           <p>{{ project.summary }}</p>
           <TagList :tags="project.stack" />
-          <span class="project-card__link">View Case →</span>
+          <span class="project-card__link">{{ t.action.viewCase }} →</span>
         </RouterLink>
       </div>
     </div>
@@ -29,13 +29,30 @@
 </template>
 
 <script setup lang="ts">
+import { computed, onMounted, ref } from 'vue'
 import { RouterLink } from 'vue-router'
 import DoodleImage from '../common/DoodleImage.vue'
 import SectionTitle from '../common/SectionTitle.vue'
 import TagList from '../common/TagList.vue'
 import TextArrowLink from '../common/TextArrowLink.vue'
 import WatercolorBlob from '../common/WatercolorBlob.vue'
-import { getFeaturedProjects } from '../../data/projects'
+import { fetchProjects } from '../../api/content'
+import { getFeaturedProjects, getProjectRouteId, projects as fallbackProjects } from '../../data/projects'
+import type { ProjectItem } from '../../data/projects'
+import { useLocale } from '../../composables/use-locale'
 
-const featuredProjects = getFeaturedProjects()
+const { t } = useLocale()
+const projects = ref<ProjectItem[]>(fallbackProjects)
+const featuredProjects = computed(() =>
+  projects.value.filter((project) => project.featured).slice(0, 3),
+)
+
+onMounted(async () => {
+  try {
+    const apiProjects = await fetchProjects()
+    projects.value = apiProjects.length ? apiProjects : getFeaturedProjects()
+  } catch {
+    projects.value = fallbackProjects
+  }
+})
 </script>
