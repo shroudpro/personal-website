@@ -5,7 +5,7 @@
     <ExperienceSection />
     <ProjectsSection />
     <AchievementsSection />
-    <ContactSection />
+    <NotesSection />
   </div>
 </template>
 
@@ -15,5 +15,5 @@ import AboutSection from '../components/sections/AboutSection.vue'
 import ExperienceSection from '../components/sections/ExperienceSection.vue'
 import ProjectsSection from '../components/sections/ProjectsSection.vue'
 import AchievementsSection from '../components/sections/AchievementsSection.vue'
-import ContactSection from '../components/sections/ContactSection.vue'
+import NotesSection from '../components/sections/NotesSection.vue'
 </script>

@@ -1,26 +1,29 @@
 <template>
   <section class="project-detail__block">
     <h2>{{ t.project.overview }}</h2>
-    <p>{{ project.overview }}</p>
+    <MarkdownBlocks :blocks="overviewBlocks" />
   </section>
 
   <section class="project-detail__block">
     <h2>{{ t.project.role }}</h2>
-    <ul class="project-detail__list">
-      <li v-for="role in project.role" :key="role">{{ role }}</li>
-    </ul>
+    <MarkdownBlocks :blocks="roleBlocks" />
   </section>
 </template>
 
 <script setup lang="ts">
-import type { ProjectItem } from '../../data/projects'
+import { computed } from 'vue'
+import MarkdownBlocks from '../common/MarkdownBlocks.vue'
+import type { ProjectContent } from '../../content'
 import { useLocale } from '../../composables/use-locale'
+import { getBlocksByHeading } from '../../content/markdown'
 
 interface ProjectOverviewProps {
-  project: ProjectItem
+  project: ProjectContent
 }
 
-defineProps<ProjectOverviewProps>()
+const props = defineProps<ProjectOverviewProps>()
 
 const { t } = useLocale()
+const overviewBlocks = computed(() => getBlocksByHeading(props.project.blocks, 'Overview'))
+const roleBlocks = computed(() => getBlocksByHeading(props.project.blocks, 'My Role'))
 </script>

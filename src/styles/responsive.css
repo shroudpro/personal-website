@@ -8,6 +8,7 @@
   }
 
   .section-inner,
+  .blog-page,
   .project-detail {
     padding: var(--space-12) var(--space-8);
   }
@@ -23,6 +24,7 @@
   }
 
   .project-grid,
+  .note-grid,
   .achievement-grid {
     grid-template-columns: 1fr;
   }
@@ -77,6 +79,7 @@
   }
 
   .section-inner,
+  .blog-page,
   .project-detail {
     padding: var(--space-12) var(--space-4);
   }
@@ -107,6 +110,7 @@
 
   .capability-grid,
   .feature-grid,
+  .note-grid,
   .challenge-list {
     grid-template-columns: 1fr;
   }

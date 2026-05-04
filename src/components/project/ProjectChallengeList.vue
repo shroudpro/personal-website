@@ -11,8 +11,12 @@
 </template>
 
 <script setup lang="ts">
-import type { ProjectChallenge } from '../../data/projects'
 import { useLocale } from '../../composables/use-locale'
+
+interface ProjectChallenge {
+  title: string
+  solution: string
+}
 
 interface ProjectChallengeListProps {
   challenges: ProjectChallenge[]

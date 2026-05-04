@@ -9,12 +9,15 @@
             <p class="timeline__period">{{ item.period }}</p>
             <div>
               <h3>{{ item.role }}</h3>
-              <p class="timeline__org">{{ item.org }}</p>
+              <p class="timeline__org">{{ item.title || item.category }}</p>
             </div>
-            <p class="timeline__description">{{ item.description }}</p>
+            <div class="timeline__content">
+              <p class="timeline__description">{{ item.summary }}</p>
+              <TagList :tags="item.tags" />
+            </div>
           </li>
         </ol>
-        <TextArrowLink :label="t.action.viewResume" :to="{ path: '/', hash: '#contact' }" />
+        <TextArrowLink :label="t.action.viewNotes" :to="{ path: '/blog' }" />
       </div>
 
       <div class="section-art experience-section__art">
@@ -26,25 +29,13 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref } from 'vue'
 import DoodleImage from '../common/DoodleImage.vue'
 import SectionTitle from '../common/SectionTitle.vue'
+import TagList from '../common/TagList.vue'
 import TextArrowLink from '../common/TextArrowLink.vue'
 import WatercolorBlob from '../common/WatercolorBlob.vue'
-import { fetchExperiences } from '../../api/content'
-import { experiences as fallbackExperiences } from '../../data/experiences'
-import type { ExperienceItem } from '../../data/experiences'
+import { experiences } from '../../content'
 import { useLocale } from '../../composables/use-locale'
 
 const { t } = useLocale()
-const experiences = ref<ExperienceItem[]>(fallbackExperiences)
-
-onMounted(async () => {
-  try {
-    const apiExperiences = await fetchExperiences()
-    experiences.value = apiExperiences.length ? apiExperiences : fallbackExperiences
-  } catch {
-    experiences.value = fallbackExperiences
-  }
-})
 </script>

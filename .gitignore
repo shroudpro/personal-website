@@ -6,3 +6,6 @@ backend/tests/runtime/
 backend/portfolio.db
 *.pyc
 __pycache__/
+
+# Local Netlify folder
+.netlify

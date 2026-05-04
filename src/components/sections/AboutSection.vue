@@ -8,6 +8,24 @@
             <p v-for="paragraph in profile.aboutIntro" :key="paragraph">{{ paragraph }}</p>
           </div>
           <TextArrowLink :label="t.action.moreAbout" :to="{ path: '/', hash: '#experience' }" />
+
+          <ul class="contact-links contact-links--panel about-section__contact">
+            <li v-for="link in profile.contactLinks" :key="link.label">
+              <span>{{ contactLabelMap[link.label] }}</span>
+              <a v-if="link.enabled" :href="link.href" target="_blank" rel="noreferrer">
+                {{ link.value }}
+              </a>
+              <em v-else>{{ link.value || t.contact.disabled }}</em>
+            </li>
+            <li>
+              <span>{{ t.contact.status }}</span>
+              <em>{{ profile.status }}</em>
+            </li>
+            <li>
+              <span>{{ t.contact.location }}</span>
+              <em>{{ profile.location }}</em>
+            </li>
+          </ul>
         </div>
 
         <div class="section-art about-section__art">
@@ -28,6 +46,7 @@
 </template>
 
 <script setup lang="ts">
+import { computed } from 'vue'
 import DoodleImage from '../common/DoodleImage.vue'
 import SectionTitle from '../common/SectionTitle.vue'
 import TextArrowLink from '../common/TextArrowLink.vue'
@@ -36,4 +55,9 @@ import { profile } from '../../data/profile'
 import { useLocale } from '../../composables/use-locale'
 
 const { t } = useLocale()
+const contactLabelMap = computed<Record<string, string>>(() => ({
+  Email: t.value.contact.email,
+  GitHub: t.value.contact.github,
+  Resume: t.value.contact.resume,
+}))
 </script>

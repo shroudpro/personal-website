@@ -13,7 +13,7 @@
           target="_blank"
           rel="noreferrer"
         >
-          {{ action.label }} →
+          {{ getActionLabel(action.label) }} →
         </a>
       </div>
     </div>
@@ -26,17 +26,29 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import type { ProjectItem } from '../../data/projects'
-import { getProjectActions } from '../../data/projects'
+import type { ProjectContent } from '../../content'
+import { getProjectActions } from '../../content'
 import DoodleImage from '../common/DoodleImage.vue'
 import TagList from '../common/TagList.vue'
 import WatercolorBlob from '../common/WatercolorBlob.vue'
+import { useLocale } from '../../composables/use-locale'
 
 interface ProjectHeroProps {
-  project: ProjectItem
+  project: ProjectContent
 }
 
 const props = defineProps<ProjectHeroProps>()
 
+const { t } = useLocale()
 const projectActions = computed(() => getProjectActions(props.project))
+
+function getActionLabel(label: string): string {
+  if (label === 'View GitHub') {
+    return t.value.action.viewGithub
+  }
+  if (label === 'View Demo') {
+    return t.value.action.viewDemo
+  }
+  return label
+}
 </script>

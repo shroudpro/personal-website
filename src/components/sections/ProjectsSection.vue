@@ -29,30 +29,15 @@
 </template>
 
 <script setup lang="ts">
-import { computed, onMounted, ref } from 'vue'
 import { RouterLink } from 'vue-router'
 import DoodleImage from '../common/DoodleImage.vue'
 import SectionTitle from '../common/SectionTitle.vue'
 import TagList from '../common/TagList.vue'
 import TextArrowLink from '../common/TextArrowLink.vue'
 import WatercolorBlob from '../common/WatercolorBlob.vue'
-import { fetchProjects } from '../../api/content'
-import { getFeaturedProjects, getProjectRouteId, projects as fallbackProjects } from '../../data/projects'
-import type { ProjectItem } from '../../data/projects'
+import { getFeaturedProjects, getProjectRouteId } from '../../content'
 import { useLocale } from '../../composables/use-locale'
 
 const { t } = useLocale()
-const projects = ref<ProjectItem[]>(fallbackProjects)
-const featuredProjects = computed(() =>
-  projects.value.filter((project) => project.featured).slice(0, 3),
-)
-
-onMounted(async () => {
-  try {
-    const apiProjects = await fetchProjects()
-    projects.value = apiProjects.length ? apiProjects : getFeaturedProjects()
-  } catch {
-    projects.value = fallbackProjects
-  }
-})
+const featuredProjects = getFeaturedProjects()
 </script>
