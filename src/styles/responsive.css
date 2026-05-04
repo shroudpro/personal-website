@@ -58,8 +58,12 @@
   }
 
   .sidebar__logo img {
-    width: 42px;
-    height: 42px;
+    width: 63px;
+    height: 63px;
+  }
+
+  .sidebar__logo span {
+    display: none;
   }
 
   .sidebar__nav {

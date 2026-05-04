@@ -2,6 +2,7 @@
   <aside class="sidebar" aria-label="站点导航">
     <RouterLink class="sidebar__logo" :to="{ path: '/', hash: '#home' }" aria-label="返回首页">
       <img src="/images/doodles/eye-logo.png" alt="" />
+      <span>Shroud</span>
     </RouterLink>
 
     <nav class="sidebar__nav">
@@ -27,7 +28,7 @@
           rel="noreferrer"
           :aria-label="link.label"
         >
-          {{ link.label.slice(0, 2) }}
+          {{ link.label.toLowerCase() }}
         </a>
       </div>
       <p>© 2026 {{ profile.name }}</p>
@@ -44,7 +45,9 @@ import { profile } from '../../data/profile'
 import { useLocale } from '../../composables/use-locale'
 
 const activeTarget = ref(navItems[0]?.target ?? 'home')
-const enabledSocialLinks = computed(() => profile.contactLinks.filter((link) => link.enabled))
+const enabledSocialLinks = computed(() =>
+  profile.contactLinks.filter((link) => link.enabled && link.label === 'GitHub'),
+)
 const { t, toggleLocale } = useLocale()
 
 function getNavLabel(target: string): string {
