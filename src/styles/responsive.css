@@ -1,0 +1,127 @@
+@media (max-width: 1024px) {
+  :root {
+    --sidebar-width: 152px;
+  }
+
+  .sidebar {
+    padding: var(--space-12) var(--space-8) var(--space-6);
+  }
+
+  .section-inner,
+  .project-detail {
+    padding: var(--space-12) var(--space-8);
+  }
+
+  h1 {
+    font-size: 64px;
+  }
+
+  .section-grid,
+  .hero-section__grid,
+  .project-detail__hero {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .project-grid,
+  .achievement-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .feature-grid,
+  .capability-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .capability-card:nth-child(2n) {
+    border-right: 0;
+  }
+}
+
+@media (max-width: 720px) {
+  .app-main {
+    margin-left: 0;
+    padding-top: 84px;
+  }
+
+  .sidebar {
+    right: 0;
+    bottom: auto;
+    width: auto;
+    min-height: 84px;
+    padding: var(--space-3) var(--space-4);
+    align-items: center;
+    flex-direction: row;
+    border-right: 0;
+    border-bottom: 1px solid var(--color-line);
+  }
+
+  .sidebar__logo img {
+    width: 42px;
+    height: 42px;
+  }
+
+  .sidebar__nav {
+    display: flex;
+    max-width: calc(100vw - 112px);
+    gap: var(--space-3);
+    overflow-x: auto;
+  }
+
+  .sidebar__footer {
+    display: none;
+  }
+
+  .portfolio-section,
+  .section-inner {
+    min-height: auto;
+  }
+
+  .section-inner,
+  .project-detail {
+    padding: var(--space-12) var(--space-4);
+  }
+
+  h1 {
+    font-size: 48px;
+  }
+
+  .hero-section__headline {
+    font-size: var(--text-xl);
+  }
+
+  .section-heading-row,
+  .achievement-stat,
+  .timeline__item,
+  .contact-links li {
+    display: grid;
+  }
+
+  .timeline__item {
+    grid-template-columns: 18px 1fr;
+  }
+
+  .timeline__period,
+  .timeline__description {
+    grid-column: 2;
+  }
+
+  .capability-grid,
+  .feature-grid,
+  .challenge-list {
+    grid-template-columns: 1fr;
+  }
+
+  .capability-card {
+    border-right: 0;
+    border-bottom: 1px solid var(--color-line);
+  }
+
+  .project-card {
+    min-height: auto;
+    padding: var(--space-4) 0;
+  }
+
+  .project-detail__hero h1 {
+    font-size: 42px;
+  }
+}

@@ -1,0 +1,55 @@
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+
+h1,
+h2 {
+  font-family: var(--font-serif-en);
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: 0;
+}
+
+h1 {
+  font-size: 88px;
+}
+
+h2 {
+  font-size: var(--text-2xl);
+}
+
+h3 {
+  font-family: var(--font-serif-cn);
+  font-size: var(--text-base);
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+p {
+  color: var(--color-muted);
+}
+
+.handwritten {
+  display: inline-block;
+  color: var(--color-text);
+  font-family: var(--font-hand);
+  font-size: var(--text-lg);
+  line-height: 1.25;
+}
+
+.handwritten::after {
+  display: block;
+  width: 48px;
+  height: 1px;
+  margin-top: var(--space-1);
+  background: var(--color-accent);
+  content: '';
+}
+
+.handwritten--note {
+  max-width: 200px;
+  transform: rotate(-3deg);
+}
