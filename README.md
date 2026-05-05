@@ -137,13 +137,21 @@ Vite 会在终端输出本地访问地址，默认监听 `127.0.0.1`。
 npm run test
 ```
 
-### 4. 生产构建
+### 4. 类型检查
+
+```bash
+npm run typecheck
+```
+
+类型检查使用 `vue-tsc -b`，建议在本地提交前执行。
+
+### 5. 生产构建
 
 ```bash
 npm run build
 ```
 
-构建产物输出到 `dist`。
+构建产物输出到 `dist`。该命令只执行 `vite build`，用于兼容 Netlify 自动部署环境。
 
 ---
 
@@ -291,6 +299,14 @@ GITHUB_TOKEN=your_token
 
 当前版本不需要配置 Netlify 环境变量，不需要配置后端部署或数据库部署。
 
+`npm run build` 在 CI 中只运行 `vite build`。本地提交前如需完整检查，请先运行：
+
+```bash
+npm run test
+npm run typecheck
+npm run build
+```
+
 ### 手动覆盖生产部署
 
 如果需要在本地手动重新部署并覆盖当前生产站点，按下面流程执行：
@@ -300,7 +316,9 @@ GITHUB_TOKEN=your_token
 $env:npm_config_cache='.npm-cache-local'
 npx netlify status
 
-# 2. 本地构建
+# 2. 本地检查和构建
+npm run test
+npm run typecheck
 npm run build
 
 # 3. 将 dist 覆盖部署到生产环境

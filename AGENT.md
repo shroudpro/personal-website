@@ -74,7 +74,7 @@
    - 未引入大型 UI 组件库。
 
 8. 部署配置
-   - `netlify.toml` 使用 `npm run build`。
+   - `netlify.toml` 使用 `npm run build`，该命令只执行 Vite 静态构建，避免 Netlify 在只安装生产依赖时因 `vue-tsc` 权限或缺失失败。
    - 发布目录为 `dist`。
    - 已保留 SPA fallback：`/*` 到 `/index.html`。
    - 当前版本不需要 Netlify 环境变量。
@@ -89,6 +89,7 @@
 
 ```bash
 npm run test
+npm run typecheck
 npm run build
 rg "Your Name|Awesome Company|Lorem Ipsum" src README.md
 rg "\.svg" src index.html
