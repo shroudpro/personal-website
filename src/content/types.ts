@@ -71,3 +71,18 @@ export interface ProjectContent extends ProjectFrontmatter {
 export interface NoteContent extends NoteFrontmatter {
   blocks: MarkdownBlock[]
 }
+
+export type JournalEntrySource = 'experience' | 'note'
+
+export interface JournalEntry {
+  slug: string
+  title: string
+  summary: string
+  tags: string[]
+  sortOrder: number
+  isPublished: boolean
+  source: JournalEntrySource
+  dateLabel: string
+  eyebrow: string
+  blocks: MarkdownBlock[]
+}

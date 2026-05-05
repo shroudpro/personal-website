@@ -650,6 +650,29 @@
   gap: var(--space-6);
 }
 
+.blog-experience-list {
+  display: grid;
+  gap: var(--space-12);
+  margin-bottom: var(--space-12);
+}
+
+.blog-experience {
+  padding-bottom: var(--space-12);
+  border-bottom: 1px solid var(--color-line);
+}
+
+.blog-experience__heading {
+  display: grid;
+  gap: var(--space-4);
+  margin-bottom: var(--space-8);
+}
+
+.blog-notes-block {
+  display: grid;
+  gap: var(--space-6);
+  margin-bottom: var(--space-12);
+}
+
 .note-grid {
   grid-template-columns: repeat(3, 1fr);
 }

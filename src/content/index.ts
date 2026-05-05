@@ -2,6 +2,7 @@ import { parseMarkdownDocument } from './markdown'
 import type {
   ExperienceContent,
   ExperienceFrontmatter,
+  JournalEntry,
   NoteContent,
   NoteFrontmatter,
   ProjectAction,
@@ -85,6 +86,33 @@ export const experiences = buildExperiences()
 export const projects = buildProjects()
 export const notes = buildNotes()
 
+export const journalEntries: JournalEntry[] = [
+  ...experiences.map((item) => ({
+    slug: item.slug,
+    title: item.title,
+    summary: item.summary,
+    tags: item.tags,
+    sortOrder: item.sortOrder,
+    isPublished: item.isPublished,
+    source: 'experience' as const,
+    dateLabel: item.period,
+    eyebrow: item.category,
+    blocks: item.blocks,
+  })),
+  ...notes.map((item) => ({
+    slug: item.slug,
+    title: item.title,
+    summary: item.summary,
+    tags: item.tags,
+    sortOrder: item.sortOrder,
+    isPublished: item.isPublished,
+    source: 'note' as const,
+    dateLabel: item.date,
+    eyebrow: 'Blog / Notes',
+    blocks: item.blocks,
+  })),
+]
+
 export function getFeaturedProjects(limit = 3): ProjectContent[] {
   return projects.filter((project) => project.featured).slice(0, limit)
 }
@@ -115,8 +143,16 @@ export function getRecentNotes(limit = 3): NoteContent[] {
   return notes.slice(0, limit)
 }
 
+export function getRecentJournalEntries(limit = 3): JournalEntry[] {
+  return journalEntries.slice(0, limit)
+}
+
 export function getNoteBySlug(slug: string): NoteContent | undefined {
   return notes.find((note) => note.slug === slug)
+}
+
+export function getJournalEntryBySlug(slug: string): JournalEntry | undefined {
+  return journalEntries.find((entry) => entry.slug === slug)
 }
 
 function hasStringArray(value: unknown): value is string[] {
@@ -161,6 +197,7 @@ export function validateContentCollections(): string[] {
 
 export type {
   ExperienceContent,
+  JournalEntry,
   NoteContent,
   ProjectAction,
   ProjectContent,

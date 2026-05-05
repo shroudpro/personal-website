@@ -2,8 +2,10 @@ import { describe, expect, it } from 'vitest'
 import {
   experiences,
   getFeaturedProjects,
+  getJournalEntryBySlug,
   getNoteBySlug,
   getProjectById,
+  journalEntries,
   notes,
   projects,
   validateContentCollections,
@@ -38,6 +40,22 @@ describe('markdown content collections', () => {
     expect(getProjectById('missing-project')).toBeUndefined()
     expect(getNoteBySlug('static-portfolio-reset')?.title).toBe('静态作品集改造记录')
     expect(getNoteBySlug('missing-note')).toBeUndefined()
+  })
+
+  it('成长记录集合以 experiences 为主，并保留 Markdown 正文内容', () => {
+    expect(journalEntries.slice(0, experiences.length).every((entry) => entry.source === 'experience')).toBe(
+      true,
+    )
+
+    const experienceEntry = getJournalEntryBySlug('2026-04-frontend-refactor')
+    const noteEntry = getJournalEntryBySlug('static-portfolio-reset')
+
+    expect(experienceEntry?.source).toBe('experience')
+    expect(experienceEntry?.blocks.some((block) => block.type === 'heading' && block.text === '记录')).toBe(
+      true,
+    )
+    expect(experienceEntry?.blocks.some((block) => block.type === 'paragraph')).toBe(true)
+    expect(noteEntry?.source).toBe('note')
   })
 
   it('构建期校验会覆盖必填字段和 PNG 装饰图', () => {

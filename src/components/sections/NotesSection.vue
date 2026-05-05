@@ -8,15 +8,15 @@
 
       <div class="note-grid">
         <RouterLink
-          v-for="note in recentNotes"
-          :key="note.slug"
+          v-for="entry in recentEntries"
+          :key="entry.slug"
           class="note-card"
-          :to="{ name: 'blog-detail', params: { slug: note.slug } }"
+          :to="{ name: 'blog-detail', params: { slug: entry.slug } }"
         >
-          <p class="note-card__date">{{ note.date }}</p>
-          <h3>{{ note.title }}</h3>
-          <p>{{ note.summary }}</p>
-          <TagList :tags="note.tags" />
+          <p class="note-card__date">{{ entry.dateLabel }} · {{ getSourceLabel(entry.source) }}</p>
+          <h3>{{ entry.title }}</h3>
+          <p>{{ entry.summary }}</p>
+          <TagList :tags="entry.tags" />
           <span>{{ t.action.readNote }} →</span>
         </RouterLink>
       </div>
@@ -29,9 +29,14 @@ import { RouterLink } from 'vue-router'
 import SectionTitle from '../common/SectionTitle.vue'
 import TagList from '../common/TagList.vue'
 import TextArrowLink from '../common/TextArrowLink.vue'
-import { getRecentNotes } from '../../content'
+import { getRecentJournalEntries } from '../../content'
+import type { JournalEntrySource } from '../../content/types'
 import { useLocale } from '../../composables/use-locale'
 
 const { t } = useLocale()
-const recentNotes = getRecentNotes()
+const recentEntries = getRecentJournalEntries()
+
+function getSourceLabel(source: JournalEntrySource): string {
+  return source === 'experience' ? t.value.blog.experienceLabel : t.value.blog.noteLabel
+}
 </script>

@@ -21,7 +21,7 @@
 
 3. Blog / Notes 使用 Markdown 维护：
    - 目录：`src/content/notes`
-   - 首页展示最近 3 条记录。
+   - 作为成长记录页中的补充小记录，不替代主要经历。
    - 路由：`/blog`、`/blog/:slug`。
 
 4. Achievement 使用 TypeScript 数据维护：
@@ -58,9 +58,9 @@
    - 缺失章节时展示稳定空状态，不导致页面崩溃。
 
 5. Blog / Notes
-   - 首页展示最近 3 条成长记录。
-   - `/blog` 展示全部已发布 notes。
-   - `/blog/:slug` 展示单篇 Markdown 正文。
+   - 首页展示最近 3 条统一成长记录，优先来自 `src/content/experiences`。
+   - `/blog` 先完整渲染已发布 experiences 的 Markdown 正文，再展示 notes/blog 小记录。
+   - `/blog/:slug` 同时支持 experience 和 note 的 Markdown 正文。
 
 6. GitHub README 本地导入
    - 已新增 `scripts/import-github-project.ts`。

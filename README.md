@@ -26,7 +26,7 @@
 - Markdown 内容维护：Experience、Project、Blog / Notes 均通过本地 Markdown 管理。
 - 项目作品展示：首页展示精选项目，详情页渲染项目 Markdown。
 - 成长记录时间线：Experience 从 Markdown frontmatter 生成时间线。
-- Blog / Notes：支持列表页和详情页，用于记录阶段性思考。
+- Blog / Notes：成长记录页以 Experience Markdown 为主，额外展示 notes/blog 小记录。
 - 静态 UI 中英文切换：只切换导航、标题、按钮、提示和空状态。
 - Netlify 自动部署：GitHub push 后自动构建并发布。
 
@@ -36,7 +36,7 @@
 
 - 首页：Hero、About、Experience、Projects、Achievements、Blog / Notes。
 - 项目详情页：`/project/:id`，从 Project Markdown 渲染。
-- Blog 列表与详情：`/blog`、`/blog/:slug`。
+- 成长记录列表与详情：`/blog`、`/blog/:slug`，同时支持 experiences 和 notes。
 - Markdown 项目内容：`src/content/projects`。
 - Markdown 成长记录：`src/content/experiences`。
 - Markdown Blog / Notes：`src/content/notes`。
@@ -170,6 +170,8 @@ isPublished: true
 这里写成长记录正文。
 ```
 
+Experience 是成长记录页的主要内容来源。`/blog` 会完整渲染已发布 Experience Markdown 的正文，`/blog/:slug` 也可以打开单条 Experience 详情。
+
 `isPublished: false` 的内容不会展示，`sortOrder` 越小越靠前。
 
 ### 新增 Project
@@ -238,6 +240,8 @@ isPublished: true
 
 这里写正文。
 ```
+
+Notes / Blog 适合记录更短的阶段想法、工具使用笔记或临时复盘，会作为成长记录页中的补充记录展示。
 
 ### 修改 Achievement
 
@@ -321,7 +325,7 @@ A: 当前目标是静态个人博客 + 作品集。内容由本地 Markdown / Ty
 A: 在 `src/content/projects` 新建 Markdown，补齐 frontmatter 和正文。如果希望首页展示，设置 `featured: true`、`isPublished: true`，并调整 `sortOrder`。
 
 **Q: 如何新增成长记录？**  
-A: Experience 放在 `src/content/experiences`，Blog / Notes 放在 `src/content/notes`。新增后运行 `npm run test` 和 `npm run build`。
+A: 主要经历放在 `src/content/experiences`，会在 `/blog` 中完整渲染 Markdown 正文。短笔记或临时复盘放在 `src/content/notes`，会作为补充小记录展示。新增后运行 `npm run test` 和 `npm run build`。
 
 **Q: 为什么修改内容后线上没变化？**  
 A: 请确认修改已提交并 push 到 Netlify 绑定的 GitHub 分支，同时检查 Netlify 的最新构建是否成功。
