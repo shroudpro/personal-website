@@ -1,5 +1,5 @@
 ---
-title: "AI PPT 生成系统阶段记录"
+title: "AI PPT 生成系统"
 period: "2026-05"
 role: "AI Application Developer"
 category: "Project Learning"

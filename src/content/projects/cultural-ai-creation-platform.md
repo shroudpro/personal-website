@@ -1,6 +1,6 @@
 ---
 id: "cultural-ai-creation-platform"
-title: "Cultural AI Creation Platform"
+title: "纹生万象-传统文化设计平台"
 type: "AI Creative Product"
 summary: "一个结合汉字文化解析与文生图能力的传统文化创意平台，用于生成海报、包装和文创视觉方案。"
 stack:
