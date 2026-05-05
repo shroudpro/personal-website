@@ -151,7 +151,7 @@ npm run typecheck
 npm run build
 ```
 
-构建产物输出到 `dist`。该命令只执行 `vite build`，用于兼容 Netlify 自动部署环境。
+构建产物输出到 `dist`。该命令通过 `node ./node_modules/vite/bin/vite.js build` 运行 Vite，用于兼容 Netlify 自动部署环境中 `.bin` 可执行文件权限异常的情况。
 
 ---
 
@@ -299,7 +299,7 @@ GITHUB_TOKEN=your_token
 
 当前版本不需要配置 Netlify 环境变量，不需要配置后端部署或数据库部署。
 
-`npm run build` 在 CI 中只运行 `vite build`。本地提交前如需完整检查，请先运行：
+`npm run build` 在 CI 中只运行 Vite 静态构建，并且直接通过 Node 执行 Vite 入口文件，不依赖 `node_modules/.bin/vite` 的执行权限。本地提交前如需完整检查，请先运行：
 
 ```bash
 npm run test
