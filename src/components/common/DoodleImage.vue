@@ -1,5 +1,5 @@
 <template>
-  <img class="doodle-image" :src="src" :alt="alt" loading="lazy" />
+  <img class="doodle-image doodle-image--float" :src="src" :alt="alt" loading="lazy" />
 </template>
 
 <script setup lang="ts">

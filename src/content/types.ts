@@ -26,6 +26,7 @@ export interface ExperienceFrontmatter {
 export interface ProjectFrontmatter {
   id: string
   title: string
+  period?: string
   type: string
   summary: string
   stack: string[]

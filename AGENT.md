@@ -1,6 +1,6 @@
 # 项目开发进度说明
 
-更新时间：2026-05-04
+更新时间：2026-09-23
 
 ## 当前目标
 
@@ -32,6 +32,15 @@
    - 文案文件：`src/i18n/messages.ts`
    - 只切换导航、section 标题、按钮、提示、空状态等静态文案。
    - 不翻译 Markdown 正文、项目详情、成长记录正文和成就描述。
+
+6. 项目经历素材：
+   - 已将 5 个项目的精简素材写入 `src/content/projects` 和 `src/content/experiences`。
+   - 新增项目：Talk Kids、Wardrobe、Quartus MCP、数学建模竞赛求解与论文生成模板、ContractAI。
+   - 新增经历：Windows 本地 AI 语音应用适配、Quartus MCP 工具开发、数学建模 AI 工作流模板、合同审核 AI 工作流、AI 衣橱工作流。
+   - 项目 Markdown 使用 `id`、`title`、`period`、`type`、`summary`、`stack`、`featured`、`coverDoodle`、`githubUrl`、`demoUrl`、`sortOrder`、`isPublished`；`period` 格式为 `YYYY-MM` 或日期范围。
+   - 经历 Markdown 使用 `title`、`period`、`role`、`category`、`summary`、`tags`、`sortOrder`、`isPublished`。
+   - 新增项目默认 `featured: false`，不替换首页现有的前三个精选项目；内容仍会被构建期内容集合读取。
+   - Projects 与 Experiences 按 `period` 的结束月份、开始月份从新到旧排序；同期内容用 `sortOrder` 升序稳定排序。Notes 仍按 `sortOrder` 升序。
 
 ## 已完成内容
 
@@ -79,6 +88,11 @@
    - 已保留 SPA fallback：`/*` 到 `/index.html`。
    - 当前版本不需要 Netlify 环境变量。
 
+9. 当前内容状态
+   - 新增的 5 个项目和 5 条经历已设置为 `isPublished: true`，正文已明确 MVP、Alpha、模板开发和未完成能力等边界。
+   - 数学建模项目当前只能描述为模板开发与示例输入阶段，不能表述为已完成预测模型或竞赛论文。
+   - Talk Kids、Wardrobe、Quartus MCP 和 ContractAI 均保留本地实验、真实设备验证、生产部署或测试覆盖等限制说明。
+
 ## 后端目录说明
 
 `backend/` 目录当前保留为历史实验代码 / 未来扩展参考，不属于当前静态站主线。当前版本不部署 FastAPI 后端，不配置数据库，也不依赖任何线上 CRUD API。
@@ -97,3 +111,11 @@ rg "FastAPI|PostgreSQL|DATABASE_URL|API_WRITE_TOKEN|Render|Neon|Supabase" README
 ```
 
 最后一条检查不是要求完全没有这些词，而是确认它们只出现在“未来扩展”或“非当前目标”语境里，不能作为当前运行或部署依赖出现。
+
+当前内容专项验证也应运行：
+
+```bash
+npm run test -- src/content/content.test.ts src/data/projects.test.ts src/i18n/messages.test.ts
+```
+
+说明：完整 `npm run test` 会递归扫描工作区中的 `.agents/skills/impeccable-main/tests`。该目录包含 Bun/AI 运行时测试，当前项目依赖未提供 `bun:test` 和 `ai`，因此完整命令可能因工作区外部测试失败；内容专项测试、`npm run typecheck` 和 `npm run build` 才是本项目内容修改的直接验证依据。

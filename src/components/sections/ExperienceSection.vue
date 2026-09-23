@@ -1,10 +1,16 @@
 <template>
-  <section id="experience" class="portfolio-section experience-section">
+  <section id="experience" ref="sectionRef" class="portfolio-section experience-section">
     <div class="section-inner section-grid">
       <div>
         <SectionTitle :title="t.section.experienceTitle" :eyebrow="t.section.experienceEyebrow" />
         <ol class="timeline">
-          <li v-for="item in experiences" :key="`${item.period}-${item.role}`" class="timeline__item">
+          <li
+            v-for="(item, index) in experiences"
+            :key="`${item.period}-${item.role}`"
+            class="timeline__item"
+            data-reveal
+            :style="{ '--reveal-index': index }"
+          >
             <span class="timeline__dot" aria-hidden="true"></span>
             <p class="timeline__period">{{ item.period }}</p>
             <div>
@@ -29,6 +35,7 @@
 </template>
 
 <script setup lang="ts">
+import { ref } from 'vue'
 import DoodleImage from '../common/DoodleImage.vue'
 import SectionTitle from '../common/SectionTitle.vue'
 import TagList from '../common/TagList.vue'
@@ -36,6 +43,9 @@ import TextArrowLink from '../common/TextArrowLink.vue'
 import WatercolorBlob from '../common/WatercolorBlob.vue'
 import { experiences } from '../../content'
 import { useLocale } from '../../composables/use-locale'
+import { useRevealOnScroll } from '../../composables/use-reveal-on-scroll'
 
 const { t } = useLocale()
+const sectionRef = ref<HTMLElement | null>(null)
+useRevealOnScroll(sectionRef)
 </script>

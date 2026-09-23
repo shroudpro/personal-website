@@ -12,17 +12,35 @@ import {
 } from './index'
 
 describe('markdown content collections', () => {
-  it('过滤未发布内容并按 sortOrder 升序展示', () => {
+  it('项目与经历按 period 从新到旧展示，同期内容按 sortOrder 稳定排序', () => {
     expect(experiences.every((item) => item.isPublished)).toBe(true)
     expect(projects.every((item) => item.isPublished)).toBe(true)
     expect(notes.every((item) => item.isPublished)).toBe(true)
 
-    expect(experiences.map((item) => item.sortOrder)).toEqual(
-      [...experiences].map((item) => item.sortOrder).sort((a, b) => a - b),
-    )
-    expect(projects.map((item) => item.sortOrder)).toEqual(
-      [...projects].map((item) => item.sortOrder).sort((a, b) => a - b),
-    )
+    expect(experiences.map((item) => item.slug)).toEqual([
+      '2026-07-wardrobe',
+      '2026-06-mathematical-modeling-template',
+      '2026-06-contract-ai',
+      '2026-05-ai-ppt-learning',
+      '2026-05-math-modeling-engineering',
+      '2026-05-codex-iteration-workflow',
+      '2026-05-quartus-mcp',
+      '2026-04-talk-kids',
+      '2026-04-study-monitor',
+      '2026-04-cultural-ai-platform',
+      '2026-04-frontend-refactor',
+      '2026-03-competition-review',
+    ])
+    expect(projects.map((item) => item.id)).toEqual([
+      'wardrobe',
+      'mathematical-modeling-ai-template',
+      'contract-ai',
+      'ai-ppt-generator',
+      'quartus-mcp',
+      'talk-kids',
+      'cultural-ai-creation-platform',
+      'study-monitor',
+    ])
     expect(notes.map((item) => item.sortOrder)).toEqual(
       [...notes].map((item) => item.sortOrder).sort((a, b) => a - b),
     )

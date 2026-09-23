@@ -132,4 +132,20 @@
   .project-detail__hero h1 {
     font-size: 42px;
   }
+
+  .hero-section__motion {
+    right: 8px;
+    bottom: 8px;
+    width: 180px;
+    opacity: 0.42;
+  }
+
+  .card-tilt,
+  .project-card:hover {
+    transform: none;
+  }
+
+  .timeline__item::after {
+    left: 0;
+  }
 }

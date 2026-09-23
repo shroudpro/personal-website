@@ -36,6 +36,36 @@ function bySortOrder<T extends { sortOrder: number }>(left: T, right: T): number
   return left.sortOrder - right.sortOrder
 }
 
+function getPeriodRange(period?: string): { start: number; end: number } {
+  const months = period?.match(/\d{4}-\d{2}/g)?.map((month) => {
+    const [year, monthOfYear] = month.split('-').map(Number)
+    return (year ?? 0) * 12 + (monthOfYear ?? 0)
+  }) ?? []
+
+  if (!months.length) {
+    return { start: 0, end: 0 }
+  }
+
+  return {
+    start: Math.min(...months),
+    end: Math.max(...months),
+  }
+}
+
+function byPeriodDescending<T extends { period?: string; sortOrder: number }>(
+  left: T,
+  right: T,
+): number {
+  const leftPeriod = getPeriodRange(left.period)
+  const rightPeriod = getPeriodRange(right.period)
+
+  return (
+    rightPeriod.end - leftPeriod.end ||
+    rightPeriod.start - leftPeriod.start ||
+    left.sortOrder - right.sortOrder
+  )
+}
+
 function buildExperiences(): ExperienceContent[] {
   return Object.entries(experienceModules)
     .map(([path, source]) => {
@@ -47,7 +77,7 @@ function buildExperiences(): ExperienceContent[] {
       }
     })
     .filter((item) => item.isPublished)
-    .sort(bySortOrder)
+    .sort(byPeriodDescending)
 }
 
 function buildProjects(): ProjectContent[] {
@@ -66,7 +96,7 @@ function buildProjects(): ProjectContent[] {
       }
     })
     .filter((item) => item.isPublished)
-    .sort(bySortOrder)
+    .sort(byPeriodDescending)
 }
 
 function buildNotes(): NoteContent[] {
@@ -172,7 +202,7 @@ export function validateContentCollections(): string[] {
   }
 
   for (const item of projects) {
-    if (!item.id || !item.title || !item.type || !item.summary || !item.coverDoodle) {
+    if (!item.id || !item.title || !item.period || !item.type || !item.summary || !item.coverDoodle) {
       errors.push(`Project 缺少必填字段: ${item.slug}`)
     }
     if (!hasStringArray(item.stack)) {

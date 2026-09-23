@@ -12,6 +12,14 @@
       <div class="section-art hero-section__art">
         <WatercolorBlob tone="wide" />
         <DoodleImage src="/images/doodles/hero-eye.png" alt="手绘眼睛线稿装饰" />
+        <img
+          class="hero-section__motion"
+          src="/images/animation/ink-loop.gif"
+          alt=""
+          aria-hidden="true"
+          loading="eager"
+          @error="handleMotionError"
+        />
         <p class="handwritten handwritten--note">{{ profile.handwritten.hero }}</p>
       </div>
     </div>
@@ -26,4 +34,14 @@ import { profile } from '../../data/profile'
 import { useLocale } from '../../composables/use-locale'
 
 const { t } = useLocale()
+
+function handleMotionError(event: Event): void {
+  const image = event.currentTarget as HTMLImageElement | null
+  if (!image) {
+    return
+  }
+
+  image.onerror = null
+  image.src = '/images/doodles/hero-eye.png'
+}
 </script>

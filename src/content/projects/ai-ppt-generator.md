@@ -1,6 +1,7 @@
 ---
 id: "ai-ppt-generator"
 title: "AI PPT Generator"
+period: "2026-05"
 type: "AI Web Application"
 summary: "一个面向论文和文档的 AI 演示文稿生成系统，支持内容解析、页面规划和可编辑 PPTX 输出。"
 stack:
@@ -8,7 +9,7 @@ stack:
   - FastAPI
   - LLM API
   - PPTX
-featured: true
+featured: false
 coverDoodle: "/images/doodles/browser-plant.png"
 githubUrl: ""
 demoUrl: ""

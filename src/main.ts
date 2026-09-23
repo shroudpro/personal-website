@@ -6,5 +6,6 @@ import './styles/base.css'
 import './styles/typography.css'
 import './styles/layout.css'
 import './styles/responsive.css'
+import './styles/motion.css'
 
 createApp(App).use(router).mount('#app')

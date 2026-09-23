@@ -1,6 +1,7 @@
 ---
 id: "study-monitor"
 title: "Study Monitor"
+period: "2026-04"
 type: "Computer Vision System"
 summary: "一个基于摄像头、YOLO 检测和本地 LLM 解释的学习状态分析原型，用于记录和展示学习行为状态。"
 stack:
@@ -9,7 +10,7 @@ stack:
   - Qwen
   - Vue
   - Python
-featured: true
+featured: false
 coverDoodle: "/images/doodles/phone.png"
 githubUrl: ""
 demoUrl: ""

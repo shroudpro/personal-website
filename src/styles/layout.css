@@ -263,6 +263,19 @@
   z-index: 3;
 }
 
+.hero-section__motion {
+  position: absolute;
+  right: 28px;
+  bottom: 18px;
+  z-index: 1;
+  width: min(42%, 240px);
+  mix-blend-mode: multiply;
+  opacity: 0.48;
+  filter: saturate(0.82);
+  mask-image: radial-gradient(ellipse at center, #000 42%, transparent 92%);
+  pointer-events: none;
+}
+
 .about-section__art .watercolor-blob,
 .achievements-section__art .watercolor-blob,
 .contact-section__art .watercolor-blob {

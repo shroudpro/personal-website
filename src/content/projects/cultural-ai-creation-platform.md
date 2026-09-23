@@ -1,13 +1,14 @@
 ---
 id: "cultural-ai-creation-platform"
 title: "纹生万象-传统文化设计平台"
+period: "2026-04"
 type: "AI Creative Product"
 summary: "一个结合汉字文化解析与文生图能力的传统文化创意平台，用于生成海报、包装和文创视觉方案。"
 stack:
   - Vue3
   - ModelScope API
   - Prompt Engineering
-featured: true
+featured: false
 coverDoodle: "/images/doodles/chair.png"
 githubUrl: ""
 demoUrl: ""

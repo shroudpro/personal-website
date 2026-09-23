@@ -45,4 +45,8 @@
   --radius-md: 8px;
   --shadow-1: 0 1px 3px rgba(0, 0, 0, 0.08);
   --shadow-2: 0 4px 12px rgba(0, 0, 0, 0.1);
+  --motion-ease-paper: cubic-bezier(0.22, 0.72, 0.26, 1);
+  --motion-ease-ink: cubic-bezier(0.2, 0.8, 0.25, 1.08);
+  --motion-duration: 720ms;
+  --motion-stagger: 72ms;
 }
