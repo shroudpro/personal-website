@@ -18,6 +18,7 @@ describe('markdown content collections', () => {
     expect(notes.every((item) => item.isPublished)).toBe(true)
 
     expect(experiences.map((item) => item.slug)).toEqual([
+      '2026-10-coolearn',
       '2026-07-wardrobe',
       '2026-06-mathematical-modeling-template',
       '2026-06-contract-ai',
@@ -32,6 +33,7 @@ describe('markdown content collections', () => {
       '2026-03-competition-review',
     ])
     expect(projects.map((item) => item.id)).toEqual([
+      'coolearn',
       'wardrobe',
       'mathematical-modeling-ai-template',
       'contract-ai',
@@ -51,6 +53,11 @@ describe('markdown content collections', () => {
 
     expect(featuredProjects).toHaveLength(3)
     expect(featuredProjects.every((project) => project.featured && project.isPublished)).toBe(true)
+    expect(featuredProjects.map((project) => project.id)).toEqual([
+      'wardrobe',
+      'mathematical-modeling-ai-template',
+      'quartus-mcp',
+    ])
   })
 
   it('可以通过 Markdown frontmatter 的 id 和 slug 读取详情', () => {
