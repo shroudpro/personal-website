@@ -60,6 +60,13 @@ describe('markdown content collections', () => {
     ])
   })
 
+  it('Coolearn 经历使用独立的项目名称和职责文案', () => {
+    const coolearn = experiences.find((item) => item.slug === '2026-10-coolearn')
+
+    expect(coolearn?.title).toBe('Coolearn 智能学习平台')
+    expect(coolearn?.role).toBe('React 前端开发')
+  })
+
   it('可以通过 Markdown frontmatter 的 id 和 slug 读取详情', () => {
     expect(getProjectById('ai-ppt-generator')?.title).toBe('AI PPT Generator')
     expect(getProjectById('missing-project')).toBeUndefined()

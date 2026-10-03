@@ -1,5 +1,5 @@
 ---
-title: "Coolearn 智能学习平台前端开发"
+title: "Coolearn 智能学习平台"
 period: "2026-10"
 role: "React 前端开发"
 category: "Web 项目"

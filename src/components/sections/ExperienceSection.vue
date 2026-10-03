@@ -14,8 +14,8 @@
             <span class="timeline__dot" aria-hidden="true"></span>
             <p class="timeline__period">{{ item.period }}</p>
             <div>
-              <h3>{{ item.role }}</h3>
-              <p class="timeline__org">{{ item.title || item.category }}</p>
+              <h3>{{ item.title }}</h3>
+              <p class="timeline__org">{{ item.role }}</p>
             </div>
             <div class="timeline__content">
               <p class="timeline__description">{{ item.summary }}</p>
